@@ -16,7 +16,7 @@ into one.
 - A: N integers representing the number of cards in each pile.
   (Assume they are given in one line, separated by commas)
 
-[Output]
+[Output]ge
 - A single integer: the minimum total effort.
 
 [Example]
@@ -41,3 +41,20 @@ import heapq
 input = sys.stdin.readline
 
 # 여기에 코드를 작성해 보세요!
+n = input().strip()
+costs = list(map(int, input().strip().split(',')))
+
+answer = 0
+
+heapq.heapify(costs)
+   
+while len(costs) > 1:
+    smallest = heapq.heappop(costs)
+    next_smallest = heapq.heappop(costs)
+
+    sums = smallest + next_smallest
+
+    answer += sums
+    heapq.heappush(costs, sums)
+
+print(answer)
