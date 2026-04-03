@@ -2,35 +2,26 @@ import sys
 input = sys.stdin.readline
 
 n,l = map(int, input().split(' '))
-lanterns = list(map(int, input().split(' ')))
 
+lanterns = [0]
+
+ls = list(map(int, input().split(' ')))
+
+[lanterns.append(s) for s in ls]
+
+lanterns.append(l)
 lanterns.sort()
-
-left,right = 0, l
-
-def check(mid):
-    if lanterns[0] - mid > 0:
-        return False
-    for i in range(n-1):
-        diff = lanterns[i+1] - lanterns[i]
-
-        if diff > mid*2:
-            return False
-    if lanterns[n-1] + mid < l:
-        return False
-    return True
-
 
 answer = 0
 
-while left < right:
-    mid = (left+right) / 2
-    print(mid)
+for i in range(len(lanterns) - 1):
+    diff = lanterns[i+1] - lanterns[i]
+    if (i == 0 or i == len(lanterns) - 2):
+        answer = max(answer, diff)
 
-    if check(mid):
-        answer = mid
-        right = mid - 1
-    else:
-        left = mid + 1
+    if diff > answer * 2:
+        answer = max(answer, diff/2)
 
 print(answer)
+
+
