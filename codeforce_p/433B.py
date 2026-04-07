@@ -15,9 +15,9 @@ for i in range(n):
     order_prefix[i+1] = order_prefix[i] + costs[i]
 
 for _ in range(m):
-    type,start,end = map(int, input().split(' '))
+    t,start,end = map(int, input().split(' '))
     
-    if type == 1:
+    if t == 1:
         answer = prefix[end] - prefix[start-1]
         print(answer)
     else:
